@@ -9,5 +9,9 @@ public interface OrderService {
 
     List<Order> getOrdersByAdvance();
 
-    //Order save(Order order);
+    //I found that I couldn't name this "save()" like I did for customerService
+    Order saveOrder(Order order);
+
+    //I found that I couldn't name this "delete()" like the one for customerService
+    void deleteOrder(long ordid);
 }

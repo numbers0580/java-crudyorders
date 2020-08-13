@@ -8,6 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "customers")
+@JsonIgnoreProperties(value = {"hasvalueforopeningamt", "hasvalueforreceiveamt", "hasvalueforpaymentamt", "hasvalueforoutstandingamt"})
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,12 +28,20 @@ public class Customer {
 
     private String grade;
 
+    @Transient
+    public boolean hasvalueforopeningamt = false;
     private double openingamt;
 
+    @Transient
+    public boolean hasvalueforreceiveamt = false;
     private double receiveamt;
 
+    @Transient
+    public boolean hasvalueforpaymentamt = false;
     private double paymentamt;
 
+    @Transient
+    public boolean hasvalueforoutstandingamt = false;
     private double outstandingamt;
 
     private String phone;

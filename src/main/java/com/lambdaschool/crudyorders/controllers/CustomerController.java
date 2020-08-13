@@ -27,15 +27,15 @@ public class CustomerController {
         return new ResponseEntity<>(allOrders, HttpStatus.OK);
     }
 
-    //localhost:5280/customers/:custcode
-    @GetMapping(value = "/{custid}", produces = "application/json")
+    //localhost:5280/customers/customer/:custcode
+    @GetMapping(value = "/customer/{custid}", produces = "application/json")
     public ResponseEntity<?> findTargetedCustomer(@PathVariable long custid) {
         Customer specCustomer = customerService.getThatCustomer(custid);
         return new ResponseEntity<>(specCustomer, HttpStatus.OK);
     }
 
     //Test Only
-    //localhost:5280/customers/:custcode(notfound)
+    //localhost:5280/customers/customer/:custcode(notfound)
     //Test for custcode # 77 was successful
 
     //localhost:5280/customers/namelike/:substring
@@ -66,8 +66,25 @@ public class CustomerController {
     }
 
     //PUT - localhost:5280/customers/customer/{custcode}
+    @PutMapping(value = "/customer/{cid}", consumes = "application/json")
+    public ResponseEntity<?> updatingCustomer(@Valid @RequestBody Customer updateCustomer, @PathVariable long cid) {
+        updateCustomer.setCustcode(cid);
+        customerService.save(updateCustomer);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     //PATCH - localhost:5280/customers/customer/{custcode}
+    @PatchMapping(value = "/customer/{patchid}", consumes = "application/json")
+    public ResponseEntity<?> updatingField(@RequestBody Customer updatedField, @PathVariable long patchid) {
+        customerService.update(updatedField, patchid);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     //DELETE - localhost:5280/customers/customer/{custcode}
+    @DeleteMapping(value = "/customer/{removeid}")
+    public ResponseEntity<?> rightToRefuseService(@PathVariable long removeid) {
+        customerService.delete(removeid);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

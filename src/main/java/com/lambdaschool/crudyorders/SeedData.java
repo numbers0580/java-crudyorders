@@ -550,9 +550,9 @@ public class SeedData implements CommandLineRunner {
 
             for(int j = 0; j < randInt; j++) {
                 int rndAmt1 = rand.nextInt(7) + 1;
-                int rndAmt2 = rand.nextInt(22) + 1;
+                int rndAmt2 = rand.nextInt(22); //Removed "+ 1" to allow for some advanceamounts of 0.00 to exist for Stretch test
 
-                customer.getOrders().add(new Order(rndAmt1 * 20.00, rndAmt2 * 100.00, customer, ""));
+                customer.getOrders().add(new Order(rndAmt1 * 20.00, 0 * 100.00, customer, ""));
             }
 
             customer.setCustcity(fakeAcct.country().capital());

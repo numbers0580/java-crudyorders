@@ -6,4 +6,6 @@ public interface AgentService {
     Agent findHiddenAgent(long doubleo);
 
     Agent save(Agent agent);
+
+    void burnNotice(long rogueid);
 }
